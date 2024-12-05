@@ -7,11 +7,21 @@ async function createBoard() {
     turn = window.turn
 
     let turns = document.getElementById('turns')
+
     if (turn == true) {
-        turns.innerText = "White's Turn ⚪"
-    }
-    else {
-        turns.innerHTML = "Black's Turn ⚫"
+        turns.innerText = "Nato's Turn ";
+        let natoFlag = document.createElement('img');
+        natoFlag.src = "static/images/nato.png";  // Replace with your NATO flag image path
+        natoFlag.alt = "Nato Flag";
+        natoFlag.classList.add('turn-flag');
+        turns.appendChild(natoFlag);  // Add the flag image next to the text
+    } else {
+        turns.innerText = "Russia's Turn ";
+        let russiaFlag = document.createElement('img');
+        russiaFlag.src = "static/images/russia.png";  // Replace with your Russia flag image path
+        russiaFlag.alt = "Russia Flag";
+        russiaFlag.classList.add('turn-flag');
+        turns.appendChild(russiaFlag);  // Add the flag image next to the text
     }
 
     const aiCol = document.getElementById('aiCol').innerText
@@ -29,8 +39,7 @@ async function createBoard() {
             let uiLet
             if ((i + j) % 2 == 0) {
                 sqColor = 'light'
-            }
-            else {
+            } else {
                 sqColor = 'dark'
             }
             piece = board[i][j]
@@ -155,8 +164,7 @@ function drawImages(piece) {
     let color
     if (isUpperCase(piece)) {
         color = 'w'
-    }
-    else {
+    } else {
         color = 'b'
     }
 
@@ -225,7 +233,6 @@ function pieceClickHandler(selectedPiece, selected, highlighted) {
 }
 
 
-
 function removeHighlights(selected, highlighted) {
     selected.forEach(function (sq) {
         sq.classList.remove('selected')
@@ -259,21 +266,30 @@ function movePieces(differences, newBoard) {
             }
             squareText.innerText = differences[i]['n']
 
-        }
-        else {
+        } else {
             square.removeChild(SquareImage)
             squareText.innerText = differences[i]['n']
         }
         window.boardVar = newBoard
     }
 
-    turn = window.turn
-    let turns = document.getElementById('turns')
+    let turn = window.turn;
+    let turns = document.getElementById('turns');
+
     if (turn == true) {
-        turns.innerText = "White's Turn ⚪"
-    }
-    else {
-        turns.innerHTML = "Black's Turn ⚫"
+        turns.innerText = "Nato's Turn ";
+        let natoFlag = document.createElement('img');
+        natoFlag.src = "static/images/nato.png";  // Replace with your NATO flag image path
+        natoFlag.alt = "Nato Flag";
+        natoFlag.classList.add('turn-flag');
+        turns.appendChild(natoFlag);  // Add the flag image next to the text
+    } else {
+        turns.innerText = "Russia's Turn ";
+        let russiaFlag = document.createElement('img');
+        russiaFlag.src = "static/images/russia.png";  // Replace with your Russia flag image path
+        russiaFlag.alt = "Russia Flag";
+        russiaFlag.classList.add('turn-flag');
+        turns.appendChild(russiaFlag);  // Add the flag image next to the text
     }
 
 
@@ -286,7 +302,7 @@ function compareBoard(newBoard) {
     for (let i = 0; i < newBoard.length; i++) {
         for (let j = 0; j < newBoard[i].length; j++) {
             if (newBoard[i][j] !== oldBoard[i][j]) {
-                changesArr.push({ 'o': oldBoard[i][j], 'n': newBoard[i][j], 'c': String(i) + String(j) })
+                changesArr.push({'o': oldBoard[i][j], 'n': newBoard[i][j], 'c': String(i) + String(j)})
             }
 
         }
@@ -316,8 +332,7 @@ function upInverse(switcher, string) {
 
     if (switcher == true) {
         return isUpperCase(string[0])
-    }
-    else if (switcher == false) {
+    } else if (switcher == false) {
 
         if (string) {
             return !isUpperCase(string[0])
@@ -332,8 +347,7 @@ function checkMateHandler(checker) {
     if (checker == 'c') {
         if (window.turn == true) {
             win = 'black won by checkmate'
-        }
-        else {
+        } else {
             win = 'white won by checkmate'
         }
     }
