@@ -4,30 +4,145 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Select</title>
+    <title>Select Mode</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/selector.css' %}" />
-    <link
-      rel="shortcut icon"
-      type="image/png"
-      href="{% static 'chess.png' %}"
-    />
+    <link rel="icon" type="image/png" href="{% static 'chess.png' %}" />
+    <style>
+      /* Center video on the screen */
+      #natoVideo, #russiaVideo {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%; /* Adjust to fit */
+        height: auto;
+        z-index: 1000;
+        background: black;
+        display: none; /* Hide by default */
+      }
+
+      /* Loading line */
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px; /* Line height */
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none; /* Initially hidden */
+        z-index: 999;
+      }
+
+      .loading-line {
+        width: 0;
+        height: 100%;
+        background-color: #3498db;
+        transition: width 0.1s; /* Smooth transition for width changes */
+      }
+    </style>
   </head>
   <body>
-    <div id="firstButton">
-        <a href="{% url 'playLocal'%}"><button>offline</button> </a>
+    <header>
+      <h1>Select Game Mode</h1>
+    </header>
+
+    <main>
+      <section class="game-mode">
+        <a href="{% url 'playLocal' %}" class="game-link">
+          <button class="btn offline-btn">Play Offline</button>
+        </a>
+      </section>
+
+      <section class="game-mode">
+        <form action="/board" method="post" id="warGameForm" class="game-form">
+          {% csrf_token %}
+          <button id="startGameButton" class="btn start-game-btn" type="button">
+            Start the War Game
+          </button>
+          <div class="dropdown-group">
+            <label for="dropdown" class="dropdown-label">Choose your side:</label>
+            <select name="mySelect" id="dropdown" class="dropdown-select">
+              <option value="white">NATO</option>
+              <option value="black">Russia</option>
+            </select>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- Video Elements -->
+    <video id="natoVideo">
+      <source src="{% static 'videos/nato_intro.mp4' %}" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <video id="russiaVideo">
+      <source src="{% static 'videos/russia_intro.mp4' %}" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Loading Line -->
+    <div id="loadingOverlay" class="loading-overlay">
+      <div id="loadingLine" class="loading-line"></div>
     </div>
 
-    <div id="secondButton">
-      <form action="/board" method="post">
-        {%csrf_token%}
-          <button class="mybtn">AI</button>
-          <label for="dropdown">play as:</label>
-          <select name = 'mySelect' class="my-select" id="dropdown">
-            <option value="white">white</option>
-            <option value="black">black</option>
-          </select>
-        </form>
-    </div>
+    <footer>
+      <p>&copy; 2024 Chess Game. All rights reserved.</p>
+    </footer>
+
+    <script>
+      document.getElementById("startGameButton").addEventListener("click", function () {
+        const selectedSide = document.getElementById("dropdown").value;
+        const natoVideo = document.getElementById("natoVideo");
+        const russiaVideo = document.getElementById("russiaVideo");
+        const form = document.getElementById("warGameForm");
+        const loadingOverlay = document.getElementById("loadingOverlay");
+        const loadingLine = document.getElementById("loadingLine");
+
+        let videoToPlay;
+
+        // Show loading line
+        loadingOverlay.style.display = "block";
+
+        // Trigger the loading line animation
+        loadingLine.style.width = "0%"; // Reset the loading line
+        setTimeout(() => {
+          loadingLine.style.transition = "none"; // Remove transition to immediately show progress
+          loadingLine.style.width = "0%"; // Reset for smoother transition
+          setTimeout(() => {
+            loadingLine.style.transition = "width 0.1s"; // Reapply smooth transition for gradual updates
+          }, 100);
+        }, 100);
+
+        // Determine which video to play based on the selection
+        if (selectedSide === "white") {
+          videoToPlay = natoVideo;
+        } else if (selectedSide === "black") {
+          videoToPlay = russiaVideo;
+        }
+
+        if (videoToPlay) {
+          // Show the video and play it
+          videoToPlay.style.display = "block";
+          videoToPlay.play();
+
+          // Update loading line width as the video plays
+          videoToPlay.ontimeupdate = function () {
+            const progress = (videoToPlay.currentTime / videoToPlay.duration) * 100;
+            loadingLine.style.width = progress + "%"; // Update the loading line width based on video progress
+          };
+
+          // After the video ends, complete the loading line and submit the form
+          videoToPlay.onended = function () {
+            loadingLine.style.width = "100%"; // Ensure the line is fully completed
+            setTimeout(() => {
+              loadingOverlay.style.display = "none"; // Hide the loading line
+              form.submit(); // Submit the form after video ends
+            }, 500); // Wait a moment before submitting
+          };
+        }
+      });
+    </script>
   </body>
 </html>
