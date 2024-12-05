@@ -1,98 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Select Mode</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/selector.css' %}" />
-    <link rel="icon" type="image/png" href="{% static 'chess.png' %}" />
+    <link rel="stylesheet" href="{% static 'css/selector.css' %}"/>
+    <link rel="icon" type="image/png" href="{% static 'chess.png' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap"
+          rel="stylesheet"> <!-- Retro font and Modern font -->
+
     <style>
-      /* Center video on the screen */
-      #natoVideo, #russiaVideo {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80%; /* Adjust to fit */
-        height: auto;
-        z-index: 1000;
-        background: black;
-        display: none; /* Hide by default */
-      }
+        /* Basic Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif; /* Modern sans-serif font for better readability */
+            background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
 
-      /* Loading line */
-      .loading-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px; /* Line height */
-        background-color: rgba(0, 0, 0, 0.5);
-        display: none; /* Initially hidden */
-        z-index: 999;
-      }
+        /* Centered Content */
+        header, footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); /* Darker header/footer background */
+            z-index: 9999;
+            border-bottom: 2px solid #FF5733; /* Add a subtle bottom border */
+        }
 
-      .loading-line {
-        width: 0;
-        height: 100%;
-        background-color: #3498db;
-        transition: width 0.1s; /* Smooth transition for width changes */
-      }
+        h1 {
+            font-size: 3.5rem;
+            color: #FF5733;
+            font-family: 'Press Start 2P', cursive; /* Retro game font */
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
+        }
+
+        footer p {
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            color: #ddd;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100% - 120px); /* Account for header and footer */
+            flex-direction: column;
+            text-align: center;
+            color: white;
+        }
+
+        .game-mode {
+            margin-top: 40px;
+        }
+
+        /* Button Styling */
+        .btn {
+            font-size: 1.4rem;
+            padding: 15px 40px;
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #FF7043;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.7); /* Focus ring for accessibility */
+        }
+
+        /* Dropdown Styling */
+        .dropdown-group {
+            margin-top: 30px;
+            font-size: 1.2rem;
+        }
+
+        .dropdown-select {
+            padding: 12px;
+            font-size: 1.2rem;
+            background: rgba(255, 87, 51, 0.8);
+            color: white;
+            border-radius: 8px;
+            border: 2px solid #FF5733;
+            transition: all 0.3s ease;
+            width: 200px;
+            margin-top: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .dropdown-select:hover {
+            background-color: #FF7043;
+            cursor: pointer;
+        }
+
+        /* Video Elements */
+        #natoVideo, #russiaVideo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: auto;
+            z-index: 1000;
+            background: black;
+            display: none;
+            border-radius: 10px; /* Rounded corners for video */
+        }
+
+        /* Loading Line */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .loading-line {
+            width: 0;
+            height: 100%;
+            background-color: #3498db;
+            transition: width 0.1s;
+        }
+
+        .player-selection h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: red; /* Make the text red */
+        }
+
+        .dropdown-label {
+            font-size: 1.2rem;
+            color: red;
+        }
+
+        /* Style for the dropdown container */
+        .custom-dropdown {
+            position: relative;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        /* Style for the dropdown label */
+        .dropdown-label {
+            font-size: 1.2rem;
+            color: red;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Style for the select dropdown */
+        .dropdown-select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            background-color: #f8f8f8;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            appearance: none;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Customizing the dropdown when focused */
+        .dropdown-select:focus {
+            border-color: #2980b9;
+        }
+
+        /* Style the options */
+        .dropdown-option {
+            padding: 10px;
+        }
+
+        /* Custom arrow for the dropdown */
+        .dropdown-select::after {
+            content: ' ▼';
+            font-size: 12px;
+            color: #3498db;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Hover effect for the select */
+        .dropdown-select:hover {
+            background-color: #e2e2e2;
+        }
+
+        /* Add custom icons to the options */
+        #dropdown option[data-icon="nato"] {
+            background-image: url('https://www.flaticon.com/free-icons/nato'); /* Add NATO icon URL */
+            background-repeat: no-repeat;
+            background-size: 20px;
+            padding-left: 30px;
+        }
+
+        #dropdown option[data-icon="russia"] {
+            background-image: url('https://www.flaticon.com/icons/png/512/3606/3606641.png'); /* Add Russia icon URL */
+            background-repeat: no-repeat;
+            background-size: 20px;
+            padding-left: 30px;
+        }
+
+
     </style>
-  </head>
-  <body>
-    <header>
-      <h1>Select Game Mode</h1>
-    </header>
+</head>
 
-    <main>
-      <section class="game-mode">
-        <a href="{% url 'playLocal' %}" class="game-link">
-          <button class="btn offline-btn">Play Offline</button>
-        </a>
-      </section>
+<body>
+<header>
+    <h1>Select Game Mode</h1>
+</header>
 
-      <section class="game-mode">
+
+<main>
+    <section class="game-mode">
         <form action="/board" method="post" id="warGameForm" class="game-form">
-          {% csrf_token %}
-          <button id="startGameButton" class="btn start-game-btn" type="button">
-            Start the War Game
-          </button>
-          <div class="dropdown-group">
-            <label for="dropdown" class="dropdown-label">Choose your side:</label>
-            <select name="mySelect" id="dropdown" class="dropdown-select">
-              <option value="white">NATO</option>
-              <option value="black">Russia</option>
-            </select>
-          </div>
+            {% csrf_token %}
+            <button id="startGameButton" class="btn start-game-btn" type="button">
+                Start the War Game
+            </button>
+            <div class="dropdown-group">
+                <label for="dropdown" class="dropdown-label">Choose your side:</label>
+                <div class="custom-dropdown">
+                    <select name="mySelect" id="dropdown" class="dropdown-select">
+                        <option value="white" class="dropdown-option" data-icon="nato">NATO</option>
+                        <option value="black" class="dropdown-option" data-icon="russia">Russia</option>
+                    </select>
+                </div>
+            </div>
+
         </form>
-      </section>
-    </main>
+    </section>
+</main>
 
-    <!-- Video Elements -->
-    <video id="natoVideo">
-      <source src="{% static 'videos/nato_intro.mp4' %}" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+<!-- Video Elements -->
+<video id="natoVideo">
+    <source src="{% static 'videos/nato_intro.mp4' %}" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
 
-    <video id="russiaVideo">
-      <source src="{% static 'videos/russia_intro.mp4' %}" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+<video id="russiaVideo">
+    <source src="{% static 'videos/russia_intro.mp4' %}" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
 
-    <!-- Loading Line -->
-    <div id="loadingOverlay" class="loading-overlay">
-      <div id="loadingLine" class="loading-line"></div>
-    </div>
+<!-- Loading Line -->
+<div id="loadingOverlay" class="loading-overlay">
+    <div id="loadingLine" class="loading-line"></div>
+</div>
 
-    <footer>
-      <p>&copy; 2024 Chess Game. All rights reserved.</p>
-    </footer>
+<footer>
+    <p>&copy; 2024 Chess Game. All rights reserved.</p>
+</footer>
 
-    <script>
-      document.getElementById("startGameButton").addEventListener("click", function () {
+<script>
+    document.getElementById("startGameButton").addEventListener("click", function () {
         const selectedSide = document.getElementById("dropdown").value;
         const natoVideo = document.getElementById("natoVideo");
         const russiaVideo = document.getElementById("russiaVideo");
@@ -108,41 +295,41 @@
         // Trigger the loading line animation
         loadingLine.style.width = "0%"; // Reset the loading line
         setTimeout(() => {
-          loadingLine.style.transition = "none"; // Remove transition to immediately show progress
-          loadingLine.style.width = "0%"; // Reset for smoother transition
-          setTimeout(() => {
-            loadingLine.style.transition = "width 0.1s"; // Reapply smooth transition for gradual updates
-          }, 100);
+            loadingLine.style.transition = "none"; // Remove transition to immediately show progress
+            loadingLine.style.width = "0%"; // Reset for smoother transition
+            setTimeout(() => {
+                loadingLine.style.transition = "width 0.1s"; // Reapply smooth transition for gradual updates
+            }, 100);
         }, 100);
 
         // Determine which video to play based on the selection
         if (selectedSide === "white") {
-          videoToPlay = natoVideo;
+            videoToPlay = natoVideo;
         } else if (selectedSide === "black") {
-          videoToPlay = russiaVideo;
+            videoToPlay = russiaVideo;
         }
 
         if (videoToPlay) {
-          // Show the video and play it
-          videoToPlay.style.display = "block";
-          videoToPlay.play();
+            // Show the video and play it
+            videoToPlay.style.display = "block";
+            videoToPlay.play();
 
-          // Update loading line width as the video plays
-          videoToPlay.ontimeupdate = function () {
-            const progress = (videoToPlay.currentTime / videoToPlay.duration) * 100;
-            loadingLine.style.width = progress + "%"; // Update the loading line width based on video progress
-          };
+            // Update loading line width as the video plays
+            videoToPlay.ontimeupdate = function () {
+                const progress = (videoToPlay.currentTime / videoToPlay.duration) * 100;
+                loadingLine.style.width = progress + "%"; // Update the loading line width based on video progress
+            };
 
-          // After the video ends, complete the loading line and submit the form
-          videoToPlay.onended = function () {
-            loadingLine.style.width = "100%"; // Ensure the line is fully completed
-            setTimeout(() => {
-              loadingOverlay.style.display = "none"; // Hide the loading line
-              form.submit(); // Submit the form after video ends
-            }, 500); // Wait a moment before submitting
-          };
+            // After the video ends, complete the loading line and submit the form
+            videoToPlay.onended = function () {
+                loadingLine.style.width = "100%"; // Ensure the line is fully completed
+                setTimeout(() => {
+                    loadingOverlay.style.display = "none"; // Hide the loading line
+                    form.submit(); // Submit the form after video ends
+                }, 500); // Wait a moment before submitting
+            };
         }
-      });
-    </script>
-  </body>
+    });
+</script>
+</body>
 </html>
