@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-zvlz@7#pb536%23^a9z&g5-$)mx$6*2d+wo47swt2hu@9q(p2#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['world-chess-war.eba-wiafxaef.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = [
+    'world-chess-war.eba-wiafxaef.us-west-2.elasticbeanstalk.com',
+    '3.213.245.82',
+    'ec2-3-213-245-82.compute-1.amazonaws.com'
+]
 
 
 # Application definition
