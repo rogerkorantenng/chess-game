@@ -60,7 +60,6 @@
 <!-- Reset Button -->
 
 
-
 <!-- Main Game Container -->
 <div class="container">
     <h1 class="turns" id="turns">Nato Starts</h1>
@@ -80,6 +79,8 @@
             <!-- Chessboard squares and pieces will be dynamically rendered by JS -->
         </div>
     </div>
+    <audio id="backgroundMusic" src="{% static 'music/war.mp3' %}" autoplay muted loop></audio>
+
 
     <!-- Bottom Status Bar -->
     <div class="bottom-status-bar status-bar">
@@ -120,6 +121,13 @@
         setTimeout(function () {
             document.body.classList.add('loaded');
         }, 5); // 5000 milliseconds = 5 seconds
+    });
+
+
+    document.addEventListener('click', function () {
+        const music = document.getElementById('backgroundMusic');
+        music.muted = false;
+        music.play();
     });
 </script>
 
