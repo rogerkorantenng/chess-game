@@ -3,7 +3,6 @@ body, html {
     overflow: hidden; /* Prevent horizontal overflow */
 
 
-
 }
 
 button {
@@ -93,15 +92,22 @@ a {
 
 .resetButton {
     position: absolute;
-    bottom: 3%;
-    right: 30%;
-    left: 30%;
+    bottom: 5%;
+    left: 40%; /* Adjusted for better alignment */
+    right: 40%; /* Adjusted for better alignment */
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.9rem; /* Smaller font size */
+    background: rgb(159, 189, 183);
+    color: white;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
 }
 
 
 .difContainer {
     position: relative;
-    transform: translateY(-180px) scale(0.7); /* Move up and scale the container */
+    transform: translateY(-130px) scale(0.85); /* Move up and scale the container */
     width: 90vw; /* Reduce width to 80% of the viewport width */
     height: auto; /* Let the height adjust automatically based on content */
     margin: 30px auto; /* Center the container */
@@ -124,7 +130,6 @@ a {
     left: 30%;
     background-color: #333;
     height: 50px;
-
     align-items: center;
     justify-content: center;
 }
@@ -160,6 +165,8 @@ a {
 
 .turns {
     color: white;
+    transform: translateY(-20px)
+
 }
 
 .popup .overlay {

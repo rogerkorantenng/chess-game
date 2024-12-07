@@ -3,8 +3,9 @@
 {% load static %}
 <head>
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
-    <script src="{% static 'js/jq.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <script src="{% static 'js/jq.js' %}"></script>
     <title>Chess</title>
     <link
             rel="shortcut icon"
@@ -12,10 +13,11 @@
             href="{% static 'chess.png' %}"
     />
     <style>
+        /* Inline styles for specific elements */
         .turn-flag {
-            width: 40px; /* Set the flag image size */
-            height: auto; /* Maintain aspect ratio */
-            margin-left: 5px; /* Add space between text and flag */
+            width: 40px;
+            height: auto;
+            margin-left: 5px;
         }
 
         /* Preloader Styles */
@@ -32,11 +34,10 @@
             z-index: 9999;
         }
 
-        /* Video styles */
         #preloader video {
-            width: 100%; /* Make the video cover the full width */
-            height: 100%; /* Make the video cover the full height */
-            object-fit: contain; /* Ensures the video covers the screen */
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         /* Hide preloader once page is fully loaded */
@@ -56,41 +57,54 @@
     </video>
 </div>
 
-<button class="resetButton">
-    <a href="{% url 'resetBoard' %}">Reset The Board</a>
-</button>
+<!-- Reset Button -->
 
+
+<!-- Main Game Container -->
 <div class="container">
     <h1 class="turns" id="turns">White Starts</h1>
 </div>
+
 <div class="difContainer">
+    <!-- Top Status Bar -->
     <div class="top-status-bar status-bar">
         <div id="darkStatus" class="captured-pieces">
             <h2>Captured Pieces:</h2>
         </div>
     </div>
+
+    <!-- Chessboard Container -->
     <div class="container" id="boardContainer">
-        <div class="chessboard" id="board"></div>
+        <div class="chessboard" id="board">
+            <!-- Chessboard squares and pieces will be dynamically rendered by JS -->
+        </div>
     </div>
 
+    <!-- Bottom Status Bar -->
     <div class="bottom-status-bar status-bar">
         <div id="lightStatus" class="captured-pieces">
             <h2>Captured Pieces:</h2>
         </div>
     </div>
+
+    <button class="resetButton">
+        <a href="{% url 'resetBoard' %}">Reset The Board</a>
+    </button>
 </div>
 
 {% csrf_token %}
 
+<!-- Hidden AI Color -->
 <h1 hidden id='aiCol'>{{ aiCol }}</h1>
 
+<!-- Popup for Endgame -->
 <div class="popup" id="popup-1">
     <div class="overlay"></div>
     <div class="content">
         <div class="close-btn" onclick="togglePopup()">&times;</div>
-        <h1 id="winner">Title</h1>
+        <h1 id="winner">Game Over</h1>
         <a>
-            <button class="">
+            <button class="new-game-btn">
                 <a href="{% url 'resetBoard' %}">New Game!</a>
             </button>
         </a>
@@ -102,9 +116,9 @@
 <!-- JavaScript to hide preloader after 5 seconds -->
 <script>
     window.addEventListener('load', function () {
-        setTimeout(function() {
+        setTimeout(function () {
             document.body.classList.add('loaded');
-        }, 5);  // 5000 milliseconds = 5 seconds
+        }, 5); // 5000 milliseconds = 5 seconds
     });
 </script>
 
