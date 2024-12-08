@@ -9,14 +9,14 @@ async function createBoard() {
     let turns = document.getElementById('turns')
 
     if (turn == true) {
-        turns.innerText = "Nato's Turn ";
+        turns.innerText = "Team Nato's Turn ";
         let natoFlag = document.createElement('img');
         natoFlag.src = "static/images/nato.png";  // Replace with your NATO flag image path
         natoFlag.alt = "Nato Flag";
         natoFlag.classList.add('turn-flag');
         turns.appendChild(natoFlag);  // Add the flag image next to the text
     } else {
-        turns.innerText = "Russia's Turn ";
+        turns.innerText = "Team Russia's Turn ";
         let russiaFlag = document.createElement('img');
         russiaFlag.src = "static/images/russia.png";  // Replace with your Russia flag image path
         russiaFlag.alt = "Russia Flag";
@@ -277,14 +277,14 @@ function movePieces(differences, newBoard) {
     let turns = document.getElementById('turns');
 
     if (turn == true) {
-        turns.innerText = "Nato's Turn ";
+        turns.innerText = "Team Nato's Turn ";
         let natoFlag = document.createElement('img');
         natoFlag.src = "static/images/nato.png";  // Replace with your NATO flag image path
         natoFlag.alt = "Nato Flag";
         natoFlag.classList.add('turn-flag');
         turns.appendChild(natoFlag);  // Add the flag image next to the text
     } else {
-        turns.innerText = "Russia's Turn ";
+        turns.innerText = "Team Russia's Turn ";
         let russiaFlag = document.createElement('img');
         russiaFlag.src = "static/images/russia.png";  // Replace with your Russia flag image path
         russiaFlag.alt = "Russia Flag";
@@ -361,8 +361,8 @@ function drawcaptureStatus(captureStatus) {
     let darkStatus = document.getElementById('darkStatus')
     let lightStatus = document.getElementById('lightStatus')
 
-    darkStatus.innerHTML = '<h2>Captured Pieces:</h2>'
-    lightStatus.innerHTML = '<h2>Captured Pieces:</h2>'
+    darkStatus.innerHTML = '<h2>Captured Soldiers:</h2>'
+    lightStatus.innerHTML = '<h2>Captured Soldiers:</h2>'
     // Dark
 
     for (let i = 0; i < captureStatus[0].length; i++) {
