@@ -57,9 +57,6 @@
     </video>
 </div>
 
-<!-- Reset Button -->
-
-
 <!-- Main Game Container -->
 <div class="container">
     <h1 class="turns" id="turns">Nato Starts</h1>
@@ -81,7 +78,6 @@
     </div>
     <audio id="backgroundMusic" src="{% static 'music/war.mp3' %}" loop></audio>
 
-
     <!-- Bottom Status Bar -->
     <div class="bottom-status-bar status-bar">
         <div id="lightStatus" class="captured-pieces">
@@ -94,7 +90,7 @@
     </button>
     <button id="soundToggle" class="sound-button">🔊 Sound</button>
 
-
+    <!-- Teams Information -->
     <div class="team-listA" id="teamA">
         <h3>Team Nato</h3>
         <ul>
@@ -102,68 +98,60 @@
                 <img src="https://flagcdn.com/w320/us.png" alt="USA Flag" class="flag-icon">
                 <span>United States</span>
                 <img src="{% static 'presidents/trump.jpg' %}" alt="President Joe Biden" class="president-photo">
-
             </li>
             <li>
                 <img src="https://flagcdn.com/w320/gb.png" alt="UK Flag" class="flag-icon">
                 <span>United Kingdom</span>
-                <img src="{% static 'presidents/uk.jpeg' %}" alt="Prime Minister Rishi Sunak"
-                     class="president-photo">
+                <img src="{% static 'presidents/uk.jpeg' %}" alt="Prime Minister Rishi Sunak" class="president-photo">
             </li>
             <li>
                 <img src="https://flagcdn.com/w320/de.png" alt="Germany Flag" class="flag-icon">
                 <span>Germany</span>
-                <img src="{% static 'presidents/germany.jpg' %}" alt="Chancellor Olaf Scholz"
-                     class="president-photo">
+                <img src="{% static 'presidents/germany.jpg' %}" alt="Chancellor Olaf Scholz" class="president-photo">
             </li>
             <li>
                 <img src="https://flagcdn.com/w320/fr.png" alt="France Flag" class="flag-icon">
                 <span>France</span>
-                <img src="{% static 'presidents/france.jpeg' %}" alt="President Emmanuel Macron"
-                     class="president-photo">
+                <img src="{% static 'presidents/france.jpeg' %}" alt="President Emmanuel Macron" class="president-photo">
             </li>
             <li>
                 <img src="https://flagcdn.com/w320/it.png" alt="Italy Flag" class="flag-icon">
                 <span>Italy</span>
-                <img src="{% static 'presidents/italy.webp' %}" alt="Prime Minister Giorgia Meloni"
-                     class="president-photo">
+                <img src="{% static 'presidents/italy.webp' %}" alt="Prime Minister Giorgia Meloni" class="president-photo">
             </li>
         </ul>
     </div>
 
-
     <div class="team-listB" id="teamB">
-    <h3>Team Russia</h3>
-    <ul>
-        <li>
-            <img src="https://flagcdn.com/w320/ru.png" alt="Russia Flag" class="flag-icon">
-            <span>Russia</span>
-            <img src="{% static 'presidents/russia.png' %}" alt="President Putin" class="president-photo">
-        </li>
-        <li>
-            <img src="https://flagcdn.com/w320/cn.png" alt="China Flag" class="flag-icon">
-            <span>China</span>
-            <img src="{% static 'presidents/china.jpeg' %}" alt="President Xi Jinping" class="president-photo">
-        </li>
-        <li>
-            <img src="https://flagcdn.com/w320/kp.png" alt="North Korea Flag" class="flag-icon">
-            <span>North Korea</span>
-            <img src="{% static 'presidents/korea.jpg' %}" alt="Supreme Leader Kim Jong-un" class="president-photo">
-        </li>
-        <li>
-            <img src="https://flagcdn.com/w320/sy.png" alt="Syria Flag" class="flag-icon">
-            <span>Syria</span>
-            <img src="{% static 'presidents/syria.jpg' %}" alt="President Bashar al-Assad" class="president-photo">
-        </li>
-        <li>
-            <img src="https://flagcdn.com/w320/ir.png" alt="Iran Flag" class="flag-icon">
-            <span>Iran</span>
-            <img src="{% static 'presidents/iran.webp' %}" alt="Supreme Leader Ali Khamenei" class="president-photo">
-        </li>
-        
-        
-    </ul>
-</div>
+        <h3>Team Russia</h3>
+        <ul>
+            <li>
+                <img src="https://flagcdn.com/w320/ru.png" alt="Russia Flag" class="flag-icon">
+                <span>Russia</span>
+                <img src="{% static 'presidents/russia.png' %}" alt="President Putin" class="president-photo">
+            </li>
+            <li>
+                <img src="https://flagcdn.com/w320/cn.png" alt="China Flag" class="flag-icon">
+                <span>China</span>
+                <img src="{% static 'presidents/china.jpeg' %}" alt="President Xi Jinping" class="president-photo">
+            </li>
+            <li>
+                <img src="https://flagcdn.com/w320/kp.png" alt="North Korea Flag" class="flag-icon">
+                <span>North Korea</span>
+                <img src="{% static 'presidents/korea.jpg' %}" alt="Supreme Leader Kim Jong-un" class="president-photo">
+            </li>
+            <li>
+                <img src="https://flagcdn.com/w320/sy.png" alt="Syria Flag" class="flag-icon">
+                <span>Syria</span>
+                <img src="{% static 'presidents/syria.jpg' %}" alt="President Bashar al-Assad" class="president-photo">
+            </li>
+            <li>
+                <img src="https://flagcdn.com/w320/ir.png" alt="Iran Flag" class="flag-icon">
+                <span>Iran</span>
+                <img src="{% static 'presidents/iran.webp' %}" alt="Supreme Leader Ali Khamenei" class="president-photo">
+            </li>
+        </ul>
+    </div>
 
 </div>
 
@@ -214,6 +202,28 @@
             music.muted = true; // Mute music
             soundToggle.textContent = "🔇 Muted"; // Update button text
         }
+    });
+
+    // Inactivity Timer Setup
+    let inactivityTimeout;
+
+    // Reset timer function
+    function resetInactivityTimer() {
+        clearTimeout(inactivityTimeout);
+        inactivityTimeout = setTimeout(() => {
+            // Automatically redirect to reset the game after 1 hour of inactivity
+            window.location.href = "{% url 'resetBoard' %}";
+        }, 60000);  // 1 hour = 3600000 milliseconds
+    }
+
+    // Track user activity
+    window.addEventListener('mousemove', resetInactivityTimer);
+    window.addEventListener('keypress', resetInactivityTimer);
+    window.addEventListener('click', resetInactivityTimer);
+    
+    // Initialize the timer when the page loads
+    window.addEventListener('load', function () {
+        resetInactivityTimer();
     });
 </script>
 
