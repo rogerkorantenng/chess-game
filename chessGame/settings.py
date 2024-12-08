@@ -29,7 +29,8 @@ ALLOWED_HOSTS = [
     'world-chess-war.eba-wiafxaef.us-west-2.elasticbeanstalk.com',
     '3.213.245.82',
     'ec2-3-213-245-82.compute-1.amazonaws.com',
-    '127.0.0.1'
+    '127.0.0.1',
+    '*'
 ]
 
 
