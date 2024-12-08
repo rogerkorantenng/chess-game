@@ -239,40 +239,77 @@ a {
 
 .team-listA {
     position: fixed;
-    top: 50%; /* Center vertically */
-    left: -10%; /* Align to the far left */
-    transform: translateY(-60%); /* Adjust for vertical centering */
-    background-color: grey;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    top: 30%;
+    left: -15%;
+    transform: translateY(-50%);
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 10000;
+    width: 300px;
 }
-.team-listB {
-    position: fixed;
-    top: 50%; /* Center vertically */
-    right: 0; /* Align to the far right */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-    background-color: red;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 10000;
+.team-listA h3, .team-listB h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.team-listA ul, .team-listB ul {
+    list-style: none;
+    padding: 0;
+}
+
+.team-listA li, .team-listB li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .flag-icon {
     width: 60px;
     height: 60px;
-    margin-right: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px; /* Optional for rounded corners */
-    object-fit: cover; /* Ensures the image maintains aspect ratio within the 60x60 size */
+    border-radius: 5px;
+    object-fit: cover;
+    margin-right: 10px;
 }
 
+.president-photo {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: auto;
+}
+
+.leader {
+    background-color: #ffeb3b; /* Bright yellow background */
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.leader-label {
+    font-size: 0.9rem;
+    color: #ff6347; /* Red color for the "Leader" label */
+    margin-left: 10px;
+}
+
+.team-listB {
+    position: fixed;
+    top: 30%;
+    right: -15%;
+    transform: translateY(-50%);
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    width: 300px;
+}
 
