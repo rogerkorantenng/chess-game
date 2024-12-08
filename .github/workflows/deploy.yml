@@ -19,6 +19,6 @@ jobs:
             set -e
             pwd
             cd chess-game/
-            git pull origin dev
+            git pull origin master
             source myenv/bin/activate
             pip3 install -r requirements.txt
