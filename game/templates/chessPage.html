@@ -19,43 +19,12 @@
             height: auto;
             margin-left: 5px;
         }
-
-        /* Preloader Styles */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        #preloader video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* Hide preloader once page is fully loaded */
-        body.loaded #preloader {
-            display: none;
-        }
+        
+        
     </style>
 </head>
 
 <body>
-
-<!-- Preloader -->
-<div id="preloader">
-    <video autoplay loop muted>
-        <source src="{% static 'videos/nato_intro2.mp4' %}" type="video/mp4"/>
-        Your browser does not support the video tag.
-    </video>
-</div>
 
 <!-- Main Game Container -->
 <div class="container">
