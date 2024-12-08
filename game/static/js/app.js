@@ -346,9 +346,9 @@ function checkMateHandler(checker) {
     let win = ''
     if (checker == 'c') {
         if (window.turn == true) {
-            win = 'black won by checkmate'
+            win = 'Team Russia won by checkmate'
         } else {
-            win = 'white won by checkmate'
+            win = 'Team Nato won by checkmate'
         }
     }
     if (checker == 'd') {

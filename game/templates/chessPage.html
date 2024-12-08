@@ -79,7 +79,7 @@
             <!-- Chessboard squares and pieces will be dynamically rendered by JS -->
         </div>
     </div>
-    <audio id="backgroundMusic" src="{% static 'music/war.mp3' %}" autoplay muted loop></audio>
+    <audio id="backgroundMusic" src="{% static 'music/war.mp3' %}" autoplay loop></audio>
 
 
     <!-- Bottom Status Bar -->
@@ -127,6 +127,7 @@
     document.addEventListener('click', function () {
         const music = document.getElementById('backgroundMusic');
         music.muted = false;
+        music.volume = 0.4;    // Set the volume (50%)
         music.play();
     });
 </script>
