@@ -92,6 +92,41 @@
     <button class="resetButton">
         <a href="{% url 'resetBoard' %}">Reset The Board</a>
     </button>
+    <button id="soundToggle" class="sound-button">🔊 Sound</button>
+
+    
+    <div class="team-listA" id="teamA">
+        <h3>Team A: NATO Countries</h3>
+        <ul>
+            <li>
+                <img src="https://flagcdn.com/w320/us.png" alt="USA Flag" class="flag-icon"> United States
+            </li>
+            <li>
+                <img src="https://flagcdn.com/w320/gb.png" alt="UK Flag" class="flag-icon"> United Kingdom
+            </li>
+            <li>
+                <img src="https://flagcdn.com/w320/de.png" alt="Germany Flag" class="flag-icon"> Germany
+            </li>
+            <li>
+                <img src="https://flagcdn.com/w320/fr.png" alt="France Flag" class="flag-icon"> France
+            </li>
+            <li>
+                <img src="https://flagcdn.com/w320/it.png" alt="Italy Flag" class="flag-icon"> Italy
+            </li>
+            <!-- Add more NATO countries here -->
+        </ul>
+    </div>
+
+    <div class="team-listB" id="teamB">
+        <h3>Team B</h3>
+        <ul>
+            <li>Player 1</li>
+            <li>Player 2</li>
+            <li>Player 3</li>
+            <li>Player 4</li>
+        </ul>
+    </div>
+
 </div>
 
 {% csrf_token %}
@@ -123,12 +158,24 @@
         }, 5); // 5000 milliseconds = 5 seconds
     });
 
+    const music = document.getElementById('backgroundMusic');
+    const soundToggle = document.getElementById('soundToggle');
 
-    document.addEventListener('click', function () {
-        const music = document.getElementById('backgroundMusic');
-        music.muted = false;
-        music.volume = 0.4;    // Set the volume (50%)
-        music.play();
+    // Ensure the audio starts playing with sound
+    window.addEventListener('click', () => {
+        music.volume = 0.4; // Set initial volume
+        music.play(); // Autoplay music
+    });
+
+    // Add event listener for the toggle button
+    soundToggle.addEventListener('click', () => {
+        if (music.muted) {
+            music.muted = false; // Unmute music
+            soundToggle.textContent = "🔊 Sound"; // Update button text
+        } else {
+            music.muted = true; // Mute music
+            soundToggle.textContent = "🔇 Muted"; // Update button text
+        }
     });
 </script>
 
