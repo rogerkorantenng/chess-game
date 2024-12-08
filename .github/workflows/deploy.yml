@@ -17,7 +17,8 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             set -e
-            cd /chess-game/
-            git pull origin dev
-            source myenv/bin/activate
-            pip3 install -r requirements.txt
+            pwd
+#            cd chess-game/
+#            git pull origin dev
+#            source myenv/bin/activate
+#            pip3 install -r requirements.txt
