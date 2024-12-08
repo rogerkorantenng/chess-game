@@ -1,0 +1,23 @@
+name: Django Deployment
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Executing remote SSH deploy script
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            set -e
+            cd home/ubuntu/chess-game/
+            git pull origin dev
+            source myenv/bin/activate
+            pip3 install -r requirements.txt
