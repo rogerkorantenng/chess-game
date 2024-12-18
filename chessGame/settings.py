@@ -84,10 +84,15 @@ WSGI_APPLICATION = 'chessGame.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'chess',
+        'USER': 'admin',
+        'PASSWORD': 'signdown',
+        'HOST': 'database.ccf0bl7zaufa.us-east-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation
