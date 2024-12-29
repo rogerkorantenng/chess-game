@@ -68,18 +68,26 @@ Follow these steps to set up and run the Chess Game on your local environment:
 # 1. Clone the Repository
 git clone https://github.com/rogerkorantenng/chess-game.git
 cd chess-game
+```
 
 # 2. Set Up Your Python Virtual Environment
+```bash
 python -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+```
 
 # 3. Install Required Dependencies
+```bash
 pip install -r requirements.txt
+```
 
 # 4. Migrate the Database
+```bash
 python3 manage.py migrate
+```
 
 # 5. Run the Development Server
+```bash
 python3 manage.py runserver
 ```
 
