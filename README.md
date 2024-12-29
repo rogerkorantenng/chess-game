@@ -55,9 +55,8 @@ The game was developed using **Django** as the core framework, combining cutting
 ## 🚀 Getting Started
 
 ### Prerequisites
-1. Install **Python 3.9+**.
-2. Install **PostgreSQL** for database management.
-3. Ensure **Node.js** and **npm** are installed for frontend dependencies.
+1. Install **Python 3+**.
+2. Install **MySQL** for database management.
 
 ### Installation
 ###### Linux or Mac
