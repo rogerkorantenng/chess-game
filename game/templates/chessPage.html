@@ -19,8 +19,8 @@
             height: auto;
             margin-left: 5px;
         }
-        
-        
+
+
     </style>
 </head>
 
@@ -69,25 +69,36 @@
                 <img src="{% static 'presidents/trump.jpg' %}" alt="President Joe Biden" class="president-photo">
             </li>
             <li>
-                <img src="https://flagcdn.com/w320/gb.png" alt="UK Flag" class="flag-icon">
-                <span>United Kingdom</span>
-                <img src="{% static 'presidents/uk.jpeg' %}" alt="Prime Minister Rishi Sunak" class="president-photo">
-            </li>
-            <li>
                 <img src="https://flagcdn.com/w320/de.png" alt="Germany Flag" class="flag-icon">
                 <span>Germany</span>
                 <img src="{% static 'presidents/germany.jpg' %}" alt="Chancellor Olaf Scholz" class="president-photo">
             </li>
             <li>
+                <img src="https://flagcdn.com/w320/gb.png" alt="UK Flag" class="flag-icon">
+                <span>United Kingdom</span>
+                <img src="{% static 'presidents/uk.jpeg' %}" alt="Prime Minister Rishi Sunak" class="president-photo">
+            </li>
+
+            <li>
                 <img src="https://flagcdn.com/w320/fr.png" alt="France Flag" class="flag-icon">
                 <span>France</span>
-                <img src="{% static 'presidents/france.jpeg' %}" alt="President Emmanuel Macron" class="president-photo">
+                <img src="{% static 'presidents/france.jpeg' %}" alt="President Emmanuel Macron"
+                     class="president-photo">
             </li>
             <li>
                 <img src="https://flagcdn.com/w320/it.png" alt="Italy Flag" class="flag-icon">
                 <span>Italy</span>
-                <img src="{% static 'presidents/italy.webp' %}" alt="Prime Minister Giorgia Meloni" class="president-photo">
+                <img src="{% static 'presidents/italy.webp' %}" alt="Prime Minister Giorgia Meloni"
+                     class="president-photo">
             </li>
+            <li>
+                <img src="https://flagcdn.com/w320/uk.png" alt="Ukraine Flag" class="flag-icon">
+                <span>Italy</span>
+                <img src="{% static 'presidents/ukraine.jpg' %}" alt="Volodymyr Zelenskyy"
+                     class="president-photo">
+            </li>
+
+
         </ul>
     </div>
 
@@ -115,9 +126,16 @@
                 <img src="{% static 'presidents/syria.jpg' %}" alt="President Bashar al-Assad" class="president-photo">
             </li>
             <li>
+                <img src="https://flagcdn.com/w320/pk.png" alt="Pakistan Flag" class="flag-icon">
+                <span>Italy</span>
+                <img src="{% static 'presidents/pakistan.webp' %}" alt="Asif Ali Zardari"
+                     class="president-photo">
+            </li>
+            <li>
                 <img src="https://flagcdn.com/w320/ir.png" alt="Iran Flag" class="flag-icon">
                 <span>Iran</span>
-                <img src="{% static 'presidents/iran.webp' %}" alt="Supreme Leader Ali Khamenei" class="president-photo">
+                <img src="{% static 'presidents/iran.webp' %}" alt="Supreme Leader Ali Khamenei"
+                     class="president-photo">
             </li>
         </ul>
     </div>
@@ -189,7 +207,7 @@
     window.addEventListener('mousemove', resetInactivityTimer);
     window.addEventListener('keypress', resetInactivityTimer);
     window.addEventListener('click', resetInactivityTimer);
-    
+
     // Initialize the timer when the page loads
     window.addEventListener('load', function () {
         resetInactivityTimer();
