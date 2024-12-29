@@ -60,25 +60,29 @@ The game was developed using **Django** as the core framework, combining cutting
 
 ### Installation
 ###### Linux or Mac
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/rogerkorantenng/chess-game.git
-   cd chess-game
-   '''
-2. Set up your python virtual environment
-    ```bash
-   python -m venv venv
-   source venv/bin/activate 
-   pip install -r requirements.txt
-   '''
-3. Migrate database
-   ```bash
-   python3 manage.py migrate
-   ''''
-4. Run Server
-   ```bash
-   python3 manage.py runserver
-   ''''
+# Chess Game Setup Guide
+
+Follow these steps to set up and run the Chess Game on your local environment:
+
+```bash
+# 1. Clone the Repository
+git clone https://github.com/rogerkorantenng/chess-game.git
+cd chess-game
+
+# 2. Set Up Your Python Virtual Environment
+python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+
+# 3. Install Required Dependencies
+pip install -r requirements.txt
+
+# 4. Migrate the Database
+python3 manage.py migrate
+
+# 5. Run the Development Server
+python3 manage.py runserver
+```
+
 
 
 **Join the Battle. Rewrite History. Dominate the Chessboard.**  
