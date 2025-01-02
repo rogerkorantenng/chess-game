@@ -75,7 +75,6 @@ cd chess-game
 python -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```
-
 # 3. Install Required Dependencies
 ```bash
 pip install -r requirements.txt

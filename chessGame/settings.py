@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'chessGame.wsgi.application'
 #         'NAME': 'chess',
 #         'USER': 'XXXX',
 #         'PASSWORD': 'XXXX',
-#         'HOST': 'database.ccf0bl7zaufa.us-east-1.rds.amazonaws.com',
+#         'HOST': 'XXXXXXX.us-east-1.rds.amazonaws.com',
 #         'PORT': '3306',
 #     }
 # }
