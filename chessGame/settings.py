@@ -100,7 +100,9 @@ DATABASES = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://world-chess-game-iii.hopegivers.tech'
+    'https://world-chess-game-iii.hopegivers.tech',
+    'https://world-chess-game-iii.rogerkoranteng.africa',
+
 ]
 
 # Password validation
