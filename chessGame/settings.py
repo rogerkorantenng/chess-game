@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'chessGame.wsgi.application'
 #         'NAME': 'chess',
 #         'USER': 'XXXX',
 #         'PASSWORD': 'XXXX',
-#         'HOST': 'database.ccf0bl7zaufa.us-east-1.rds.amazonaws.com',
+#         'HOST': 'XXXXXXX.us-east-1.rds.amazonaws.com',
 #         'PORT': '3306',
 #     }
 # }
@@ -98,6 +98,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://hopegivers.tech'
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
