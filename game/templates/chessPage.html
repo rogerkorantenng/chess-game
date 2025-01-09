@@ -200,7 +200,7 @@
         inactivityTimeout = setTimeout(() => {
             // Automatically redirect to reset the game after 1 hour of inactivity
             window.location.href = "{% url 'resetBoard' %}";
-        }, 60000);  // 1 hour = 3600000 milliseconds
+        }, 300000);  // 1 hour = 3600000 milliseconds
     }
 
     // Track user activity
