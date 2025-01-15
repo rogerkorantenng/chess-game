@@ -17,16 +17,19 @@ World Chess Battle III is more than just a game—it's a stage for diplomacy and
 ### 🛡️ NATO Alliance
 - **United States**: President Donald Trump *(Ability: Economic Sanctions - temporarily restricts an opponent's moves)*.  
 - **United Kingdom**: Prime Minister Rishi Sunak *(Ability: Special Forces - an extra strategic move)*.  
-- **Germany**: Chancellor Olaf Scholz *(Ability: Fortified Defense - blocks an attack for one turn)*.  
 - **France**: President Emmanuel Macron *(Ability: Diplomatic Retreat - safely withdraw a piece)*.  
 - **Italy**: *(Passive boost to alliance synergy)*.
+- **Israel**: *(Passive boost to alliance synergy)*.
+- **Ukraine**: *(Passive boost to alliance synergy)*.
+
 
 ### ⚔️ Russian Alliance
 - **Russia**: President Vladimir Putin *(Ability: Blitzkrieg - perform two attacks in one turn)*.  
 - **China**: President Xi Jinping *(Ability: Trade Negotiations - gain a temporary shield for key pieces)*.  
 - **North Korea**: Supreme Leader Kim Jong-un *(Ability: Missile Strike - remove an opponent's pawn)*.  
-- **Syria**: President Bashar al-Assad *(Ability: Guerrilla Warfare - attack and retreat simultaneously)*.  
 - **Iran**: *(Passive boost to alliance synergy)*.
+- **Burkina Faso**: *(Passive boost to alliance synergy)*.
+- **Belarus**: *(Passive boost to alliance synergy)*.
 
 Each alliance is equipped with strategic abilities that elevate the classic chess gameplay to a high-stakes geopolitical simulation.
 
